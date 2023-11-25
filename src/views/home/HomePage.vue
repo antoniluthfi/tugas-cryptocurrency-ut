@@ -8,20 +8,23 @@
 
     <ion-content>
       <ion-row class="ion-justify-content-center ion-margin">
-        <ion-button @click="getCryptos">Get Data</ion-button>
+        <ion-button @click="getCryptos">Refresh</ion-button>
       </ion-row>
 
-      <ion-item>
-        <ion-label class="ion-text-center">Name</ion-label>
-        <ion-label class="ion-text-center">Symbol</ion-label>
-        <ion-label class="ion-text-center">Price (USD)</ion-label>
-      </ion-item>
-
       <ion-list>
-        <ion-item v-for="crypto in cryptos" :key="crypto.id">
-          <ion-label>{{ crypto.name }}</ion-label>
-          <ion-label>{{ crypto.symbol }}</ion-label>
-          <ion-label>{{ crypto.price_usd }}</ion-label>
+        <ion-item v-for="crypto, index in cryptos" :key="crypto.id">
+          <ion-label>
+            <p class="ion-text-center">Rank</p>
+            <h1 class="ion-text-center">{{ index + 1 }}</h1>
+          </ion-label>
+          <ion-label>
+            <p>{{ crypto.name }}</p>
+            <h1>{{ crypto.symbol }}</h1>
+          </ion-label>
+          <ion-label>
+            <p>USD</p>
+            <h1>{{ crypto.price_usd }}</h1>
+          </ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -71,6 +74,8 @@ export default {
     window.addEventListener("offline", () => {
       this.isOnline = false;
     });
+
+    this.getCryptos();
   },
   methods: {
     getCryptos() {
